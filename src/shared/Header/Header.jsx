@@ -20,52 +20,95 @@ const Header = () => {
       <nav
         className={`lg:flex ${
           isOpen
-            ? 'absolute top-0 left-0 block bg-zinc-500 w-2/4 min-h-screen transform translate-x-0 transition-transform duration-500 ease-in-out z-50'
+            ? 'absolute top-0 left-0 block lg:hidden bg-zinc-500 w-2/4 min-h-screen transform translate-x-0 transition-transform duration-500 ease-in-out z-50'
             : 'hidden -translate-x-full'
         }`}
       >
-        <ul className="flex flex-col lg:flex-row gap-2">
-          <li className="hover:bg-zinc-700 w-full">
+        <div>
+          <h2 className="text-2xl font-bold uppercase p-6 bg-zinc-700">
+            Wraply
+          </h2>
+        </div>
+
+        {/* USER-LOGGED-ROUTES */}
+        <div className="">
+          <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase">
+            <li>
+              <Link
+                to={'/cart'}
+                onClick={handleToggle}
+                className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
+              >
+                Cart
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={'/wishlist'}
+                onClick={handleToggle}
+                className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
+              >
+                Wishlist
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to={'/payments'}
+                onClick={handleToggle}
+                className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
+              >
+                Payments
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <hr className="my-5 mx-2" />
+
+        {/* TOGGLE-NAV-ROUTES */}
+        <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase">
+          <li className="w-full">
             <Link
               to={'/'}
               onClick={handleToggle}
-              className="w-full inline-block p-2"
+              className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
             >
               Home
             </Link>
           </li>
-          <li className="hover:bg-zinc-700 w-full">
+          <li className="w-full">
             <Link
               to={'/shop'}
               onClick={handleToggle}
-              className="w-full inline-block p-2"
+              className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
             >
               Shop
             </Link>
           </li>
-          <li className="hover:bg-zinc-700 w-full">
+          <li className="w-full">
             <Link
               to={'/doc'}
               onClick={handleToggle}
-              className="w-full inline-block p-2"
+              className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
             >
               Doc
             </Link>
           </li>
-          <li className="hover:bg-zinc-700 w-full">
+          <li className="w-full">
             <Link
               to={'/about'}
               onClick={handleToggle}
-              className="w-full inline-block p-2"
+              className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
             >
               About
             </Link>
           </li>
-          <li className="hover:bg-zinc-700 w-full">
+          <li className="w-full">
             <Link
               to={'/contact'}
               onClick={handleToggle}
-              className="w-full inline-block p-2"
+              className="w-full inline-block p-2 bg-zinc-600 hover:bg-zinc-700"
             >
               Contact
             </Link>
