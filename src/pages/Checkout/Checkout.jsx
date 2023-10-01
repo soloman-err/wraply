@@ -1,6 +1,6 @@
 const Checkout = () => {
   return (
-    <div className="w-[60%] mx-auto mt-5 min-h-screen space-y-5">
+    <div className="w-[80%] mx-auto mt-5 min-h-screen space-y-5">
       {/* PRODUCT-INFO */}
       <section>
         <div>
@@ -18,15 +18,23 @@ const Checkout = () => {
 
       {/* PAYMENT-INFO */}
       <section>
-        <h2 className="text-lg font-semibold bg-zinc-600 p-2">
+        <h2 className="text-lg font-semibold bg-zinc-500 text-white p-2">
           Choose Payment Method
         </h2>
 
         {/* PAYMENT-PARTNERS */}
-        <div className="mt-5 flex flex-row items-center">
+        <div className="mt-5 flex flex-col mg:flex-row items-center">
           <img src="/ssl.png" alt="ssl" className="w-32 h-10 cursor-pointer" />
-          <img src="/stripe.png" alt="stripe" className="w-32 h-14 cursor-pointer" />
-          <img src="/paypal.png" alt="paypal" className="w-32 h-10 cursor-pointer" />
+          <img
+            src="/stripe.png"
+            alt="stripe"
+            className="w-32 h-14 cursor-pointer"
+          />
+          <img
+            src="/paypal.png"
+            alt="paypal"
+            className="w-32 h-10 cursor-pointer"
+          />
         </div>
       </section>
     </div>

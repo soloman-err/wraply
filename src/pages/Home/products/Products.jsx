@@ -106,7 +106,7 @@ const Products = () => {
   ];
 
   return (
-    <section className="mt-10 lg:mt-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-12 lg:px-20 gap-4 lg:gap-5 space-y-5 md:space-y-0">
+    <section className="mt-10 lg:mt-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-10 gap-4 lg:gap-5 space-y-5 md:space-y-0">
       {drinksList?.slice(5, 11)?.map((product) => (
         <ProductCard key={product?.id} product={product} />
       ))}

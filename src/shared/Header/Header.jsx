@@ -13,26 +13,28 @@ const Header = () => {
     <header className="relative flex justify-between py-5 px-2 border-b">
       {/* BRAND-IDENTITY */}
       <div className="uppercase font-semibold italic tracking-wider text-xl">
-        <Link to={'/'}>Wraply</Link>
+        <Link to={'/'}>
+          Wraply
+        </Link>
       </div>
 
       {/* NAVIGATION MODULES */}
       <nav
         className={`lg:flex ${
           isOpen
-            ? 'absolute top-0 left-0 block lg:hidden bg-zinc-500 w-2/4 min-h-screen transform translate-x-0 transition-transform duration-500 ease-in-out z-50'
+            ? 'fixed inset-0 top-0 left-0 block lg:hidden bg-zinc-500 w-3/4 transform translate-x-0 transition-transform duration-500 ease-in-out z-50'
             : 'hidden -translate-x-full'
         }`}
       >
         <div>
-          <h2 className="text-2xl font-bold uppercase p-6 bg-zinc-700">
+          <h2 className="text-2xl font-bold uppercase p-6 bg-zinc-700 text-white">
             Wraply
           </h2>
         </div>
 
         {/* USER-LOGGED-ROUTES */}
         <div className="">
-          <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase">
+          <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase text-white">
             <li>
               <Link
                 to={'/cart'}
@@ -67,7 +69,7 @@ const Header = () => {
         <hr className="my-5 mx-2" />
 
         {/* TOGGLE-NAV-ROUTES */}
-        <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase">
+        <ul className="flex flex-col lg:flex-row gap-1 px-2 mt-5 uppercase text-white">
           <li className="w-full">
             <Link
               to={'/'}
