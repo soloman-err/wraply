@@ -9,7 +9,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between py-5 px-2 border">
+    <header className="flex justify-between py-5 px-2">
       {/* BRAND-IDENTITY */}
       <div className="uppercase font-semibold italic tracking-wider text-xl">
         Wraply
