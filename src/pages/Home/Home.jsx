@@ -1,10 +1,12 @@
 import Hero from "./hero/Hero";
+import Products from "./products/Products";
 
 const Home = () => {
     return (
-        <div className="h-screen">
-            <Hero/>
-        </div>
+        <main className="min-h-screen">
+            <Hero />
+            <Products/>
+        </main>
     );
 };
 

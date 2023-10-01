@@ -6,11 +6,11 @@ const Hero = () => {
   return (
     <section className="border">
       <AwesomeSlider className="aws-btn">
-        <div data-src="/slide-i.jpg" alt=""></div>
-        <div data-src="/slide-ii.jpg" alt=""></div>
-        <div data-src="/slide-iii.jpg" alt=""></div>
-        <div data-src="/slide-iv.jpg" alt=""></div>
-        <div data-src="/slide-v.jpg" alt=""></div>
+        <div data-src="/drink-i.jpg" alt=""></div>
+        <div data-src="/drink-ii.jpg" alt=""></div>
+        <div data-src="/drink-iii.jpg" alt=""></div>
+        <div data-src="/drink-iv.jpg" alt=""></div>
+        <div data-src="/drink-v.jpg" alt=""></div>
       </AwesomeSlider>
     </section>
   );
