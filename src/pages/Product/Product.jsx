@@ -184,12 +184,18 @@ const Product = () => {
         </div>
 
         {/* PROCEED-CHECKOUT */}
-        <div className="">
+        <div className="space-y-5">
           <button className="w-full bg-zinc-300 hover:bg-zinc-400 py-2 px-4 rounded-sm">
             <Link to={'/checkout'} className="">
               Proceed to Checkout
             </Link>
           </button>
+          <button className="w-full bg-zinc-300 hover:bg-zinc-400 py-2 px-4 rounded-sm">
+            <Link to={'/'} className="">
+              Continue Shopping
+            </Link>
+          </button>
+          
         </div>
       </div>
     </div>

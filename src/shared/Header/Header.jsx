@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,20 +10,66 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between py-5 px-2">
+    <header className="relative flex justify-between py-5 px-2 border-b">
       {/* BRAND-IDENTITY */}
       <div className="uppercase font-semibold italic tracking-wider text-xl">
-        Wraply
+        <Link to={'/'}>Wraply</Link>
       </div>
 
       {/* NAVIGATION MODULES */}
-      <nav className="hidden lg:flex">
-        <ul className="flex gap-5">
-          <li>Home</li>
-          <li>Shop</li>
-          <li>Doc</li>
-          <li>About</li>
-          <li>Contact</li>
+      <nav
+        className={`lg:flex ${
+          isOpen
+            ? 'absolute top-0 left-0 block bg-zinc-500 w-2/4 min-h-screen transform translate-x-0 transition-transform duration-500 ease-in-out z-50'
+            : 'hidden -translate-x-full'
+        }`}
+      >
+        <ul className="flex flex-col lg:flex-row gap-2">
+          <li className="hover:bg-zinc-700 w-full">
+            <Link
+              to={'/'}
+              onClick={handleToggle}
+              className="w-full inline-block p-2"
+            >
+              Home
+            </Link>
+          </li>
+          <li className="hover:bg-zinc-700 w-full">
+            <Link
+              to={'/shop'}
+              onClick={handleToggle}
+              className="w-full inline-block p-2"
+            >
+              Shop
+            </Link>
+          </li>
+          <li className="hover:bg-zinc-700 w-full">
+            <Link
+              to={'/doc'}
+              onClick={handleToggle}
+              className="w-full inline-block p-2"
+            >
+              Doc
+            </Link>
+          </li>
+          <li className="hover:bg-zinc-700 w-full">
+            <Link
+              to={'/about'}
+              onClick={handleToggle}
+              className="w-full inline-block p-2"
+            >
+              About
+            </Link>
+          </li>
+          <li className="hover:bg-zinc-700 w-full">
+            <Link
+              to={'/contact'}
+              onClick={handleToggle}
+              className="w-full inline-block p-2"
+            >
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
 
@@ -62,9 +109,9 @@ const Header = () => {
           )}
         </button>
 
-        <div className="hidden lg:flex gap-2">
-          <button className='border px-3 py-1'>Login</button>
-          <button className='border px-3 py-1'>Register</button>
+        <div className="hidden lg:flex">
+          <button className="border px-3 py-1">Login</button>
+          <button className="border px-3 py-1">Register</button>
         </div>
       </div>
     </header>

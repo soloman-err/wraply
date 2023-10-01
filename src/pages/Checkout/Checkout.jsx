@@ -24,9 +24,9 @@ const Checkout = () => {
 
         {/* PAYMENT-PARTNERS */}
         <div className="mt-5 flex flex-row items-center">
-          <img src="/ssl.png" alt="ssl" className="w-32 h-10" />
-          <img src="/stripe.png" alt="stripe" className="w-32 h-14" />
-          <img src="/paypal.png" alt="paypal" className="w-32 h-10" />
+          <img src="/ssl.png" alt="ssl" className="w-32 h-10 cursor-pointer" />
+          <img src="/stripe.png" alt="stripe" className="w-32 h-14 cursor-pointer" />
+          <img src="/paypal.png" alt="paypal" className="w-32 h-10 cursor-pointer" />
         </div>
       </section>
     </div>
