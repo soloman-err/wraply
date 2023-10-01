@@ -1,0 +1,16 @@
+/* CUSTOM NAVIGATION BTN */
+.aws-btn {
+  --slider-height-percentage: 50%;
+  --slider-transition-duration: 475ms;
+  --organic-arrow-thickness: 4px;
+  --organic-arrow-border-radius: 0px;
+  --organic-arrow-height: 35px;
+  --organic-arrow-color: #2c576d;
+  --control-button-width: 10%;
+  --control-button-height: 25%;
+  --control-button-background: transparent;
+  --control-bullet-color: transparent;
+  --control-bullet-active-color: transparent;
+  --loader-bar-color: #2c576d;
+  --loader-bar-height: 5px;
+}
