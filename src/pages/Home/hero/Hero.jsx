@@ -4,7 +4,7 @@ import './Hero.css';
 
 const Hero = () => {
   return (
-    <section className="mt-5 border">
+    <section className="">
       <AwesomeSlider className="aws-btn">
         <div data-src="/drink-i.jpg" alt=""></div>
         <div data-src="/drink-ii.jpg" alt=""></div>
