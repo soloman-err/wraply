@@ -3,7 +3,7 @@ import Products from './products/Products';
 
 const Home = () => {
   return (
-    <main className="min-h-screen">
+    <main className="">
       <Hero />
       <Products />
     </main>

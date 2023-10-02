@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const countries = [
   'Afghanistan',
@@ -206,6 +206,10 @@ const Product = () => {
   const navigate = useNavigate();
   const [submitError, setSubmitError] = useState(false);
 
+  const location = useLocation();
+  const product = location.state?.product;
+  const { _id, description, imageUrl, price, title } = product;
+
   const {
     register,
     handleSubmit,
@@ -216,7 +220,7 @@ const Product = () => {
   const onSubmit = (data) => {
     if (isValid) {
       console.log('Valid Form', data);
-      navigate('/checkout');
+      navigate('/checkout', { state: { FormData: data } });
     } else {
       console.log('Invalid Form', data);
       setSubmitError(true);
@@ -224,14 +228,44 @@ const Product = () => {
   };
 
   return (
-    <div className="lg:w-[80%] mx-auto flex flex-col md:flex-row gap-5 min-h-screen mt-5 p-5">
-      {/* PRODUCT-IMAGE */}
-      <div className="md:w-2/4">
-        <img src="/drink-vii.jpg" alt="" />
+    <div className="lg:w-[80%] mx-auto flex flex-col md:flex-row gap-5 space-y-2 md:space-y-0 min-h-screen mt-5 p-5">
+      {/* MOCK-PRODUCT-IMAGE */}
+      <div className="md:w-2/4 space-y-2">
+        <div className="w-full relative">
+          <img src={imageUrl} alt="" className="w-full h-auto" />
+          <div className="absolute top-0 left-0 w-full h-full bg-black opacity-20 text-center items-center flex justify-center text-5xl text-white font-bold">
+            <span className="-rotate-45">MOCKUP</span>
+          </div>
+        </div>
+
+        {/* MOCK-PRODUCT-IMAGE-INFO */}
+        <div className="space-y-2 px-1">
+          <h2 className="font-semibold text-xl">{title}</h2>
+
+          <hr />
+
+          <div className="space-y-2">
+            <span className="flex justify-between font-semibold text-zinc-700">
+              <span>Price:</span> <span>${price}</span>
+            </span>
+
+            <span className="flex justify-between font-semibold text-zinc-700">
+              <span>Shipping:</span> <span>${price}</span>
+            </span>
+
+            <hr />
+
+            <span className="flex justify-between font-bold text-zinc-700 text-lg">
+              <span>Total:</span> <span>${price}</span>
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* PRODUCT-INFO */}
-      <div className="md:w-2/4 space-y-4 px-5 md:px-0">
+      <hr className="md:hidden" />
+
+      {/* CONSUMER-PRODUCT-FORM */}
+      <div className="md:w-2/4 space-y-4">
         {submitError && (
           <p className="text-red-600 mb-4">
             Please fill out all required fields.
@@ -243,6 +277,7 @@ const Product = () => {
           <div className="">
             <select
               id="options"
+              {...register('size', { require: true })}
               className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
             >
               <option value="" disabled selected>
@@ -312,6 +347,7 @@ const Product = () => {
           <div className="">
             <select
               id="options"
+              {...register('quality', { required: true })}
               className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
             >
               <option value="" disabled selected>
@@ -333,7 +369,8 @@ const Product = () => {
           {/* FINISHING OPTIONS */}
           <div className="">
             <select
-              id="options"
+              id="finishingOptions"
+              {...register('finishingOptions', { required: true })}
               className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
             >
               <option value="" disabled selected>
@@ -357,6 +394,7 @@ const Product = () => {
             <input
               type="number"
               id="quantity"
+              {...register('quantity', { required: true })}
               className="w-full p-2 rounded-sm bg-zinc-200 text-zinc-700 focus:outline-none"
               placeholder="Quantity"
             />
@@ -398,26 +436,7 @@ const Product = () => {
             </div>
           </div>
 
-          {/* SHIPPING INFO */}
-          <div className="">
-            <label
-              htmlFor="shippingAddress"
-              className="text-zinc-700 block mb-2"
-            >
-              Shipping Address
-            </label>
-            <input
-              type="text"
-              id="shippingAddress"
-              {...register('shippingAddress', { required: true })}
-              className="w-full p-2 rounded-sm text-zinc-800 bg-zinc-200 border border-zinc-300 focus:outline-none"
-              placeholder="Enter your shipping address"
-            />
-            {errors?.backImage && (
-              <p className="text-red-500">{errors?.backImage?.message}</p>
-            )}
-          </div>
-
+          {/*----- SHIPPING INFO -----*/}
           {/* ADDRESS-LINE-1 */}
           <div className="">
             <label htmlFor="addressLine1" className="text-zinc-700 block mb-2">

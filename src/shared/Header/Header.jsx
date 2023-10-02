@@ -23,7 +23,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-full top-0 left-0 z-50 flex justify-between py-5 px-2 glass">
+    <header className="w-full sticky top-0 left-0 z-50 flex justify-between py-5 px-2 glass">
       {/* BRAND-IDENTITY */}
       <div className="uppercase font-semibold italic tracking-wider text-2xl">
         <Link to={'/'}>Wraply</Link>
@@ -33,7 +33,7 @@ const Header = () => {
       <div
         className={`lg:flex items-center ${
           isOpen
-            ? 'fixed min-h-screen top-0 left-0 block lg:hidden bg-zinc-100 shadow-md w-3/4 md:w-2/4 z-50'
+            ? 'fixed inset-0 z-50 block min-h-screen lg:hidden bg-zinc-100 shadow-md w-3/4 md:w-2/4'
             : 'hidden'
         }`}
       >
@@ -42,28 +42,30 @@ const Header = () => {
         </h2>
 
         {/* NAVIGATION-ROUTES */}
-        <nav className="">
-          <ul className="flex items-center flex-col lg:flex-row gap-1 px-2 mt-5 lg:mt-0 uppercase text-white lg:text-black">
-            {navLinks.slice(0, 5).map((link, index) =>
-              link.divider ? (
-                <li
-                  key={index}
-                  className="w-3/4 mx-auto border-b border-zinc-300 mb-2 pb-2"
-                ></li>
-              ) : (
-                <li key={link?.path} className="w-full">
-                  <Link
-                    to={link?.path}
-                    onClick={isOpen ? handleToggle : undefined}
-                    className="w-full inline-block p-2 bg-zinc-400 lg:bg-transparent hover:bg-zinc-500 lg:hover:bg-transparent font-semibold md:text-lg rounded-sm"
-                  >
-                    {link?.text}
-                  </Link>
-                </li>
-              )
-            )}
-          </ul>
-        </nav>
+        <div className="z-50">
+          <nav className="z-50">
+            <ul className="flex items-center flex-col lg:flex-row gap-1 px-2 mt-5 lg:mt-0 uppercase text-white lg:text-black">
+              {navLinks.slice(0, 5).map((link, index) =>
+                link.divider ? (
+                  <li
+                    key={index}
+                    className="w-3/4 mx-auto border-b border-zinc-300 mb-2 pb-2"
+                  ></li>
+                ) : (
+                  <li key={link?.path} className="w-full">
+                    <Link
+                      to={link?.path}
+                      onClick={isOpen ? handleToggle : undefined}
+                      className="w-full inline-block p-2 bg-zinc-400 lg:bg-transparent hover:bg-zinc-500 lg:hover:bg-transparent font-semibold md:text-lg rounded-sm"
+                    >
+                      {link?.text}
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
+          </nav>
+        </div>
       </div>
 
       <div>

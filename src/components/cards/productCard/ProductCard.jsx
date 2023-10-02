@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const { imageUrl, title, description, price } = product;
-  console.log(imageUrl);
 
   return (
     <Link
       to={'/product-info'}
+      state={{ product }}
       className="flex flex-col justify-between bg-zinc-50 w-full rounded-sm overflow-hidden shadow-md"
     >
       <div className="h-full flex flex-col">
