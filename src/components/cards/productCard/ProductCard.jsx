@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const { imageUrl, title, description, price } = product;
+  console.log(imageUrl);
 
   return (
     <Link
@@ -11,7 +12,7 @@ const ProductCard = ({ product }) => {
       <div className="h-full flex flex-col">
         {/* CARD-IMAGE */}
         <div>
-          <img src={imageUrl} alt={title} />
+          <img src={`${imageUrl}`} alt={title} />
         </div>
 
         {/* CARD-INFO */}

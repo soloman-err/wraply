@@ -212,6 +212,7 @@ const Product = () => {
     formState: { errors, isValid },
   } = useForm();
 
+  // PRODUCT-FORM-FUNC:
   const onSubmit = (data) => {
     if (isValid) {
       console.log('Valid Form', data);
@@ -223,7 +224,7 @@ const Product = () => {
   };
 
   return (
-    <div className="w-[90%] lg:w-[80%] mx-auto flex flex-col md:flex-row gap-5 min-h-screen mt-5 p-5">
+    <div className="lg:w-[80%] mx-auto flex flex-col md:flex-row gap-5 min-h-screen mt-5 p-5">
       {/* PRODUCT-IMAGE */}
       <div className="md:w-2/4">
         <img src="/drink-vii.jpg" alt="" />

@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <header className="w-full top-0 left-0 z-50 flex justify-between py-5 px-2 glass">
       {/* BRAND-IDENTITY */}
-      <div className="uppercase font-semibold italic tracking-wider text-xl lg:text-2xl">
+      <div className="uppercase font-semibold italic tracking-wider text-2xl">
         <Link to={'/'}>Wraply</Link>
       </div>
 
