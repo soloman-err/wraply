@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
           Add Cart
         </button>
         <button className="w-full font-semibold bg-zinc-200 rounded-sm px-2 text-sm lg:text-base py-2">
-          <Link to={'/product-info'}>Buy Now</Link>
+          <Link to={'/product-info'}>Buy Pack</Link>
         </button>
       </div>
     </div>
