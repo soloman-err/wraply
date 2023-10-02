@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
-import Stars from '../../stars/Stars';
 
 const ProductCard = ({ product }) => {
   const { imageUrl, title, description, price } = product;
 
   return (
-    <div className="flex flex-col justify-between bg-zinc-50 w-full rounded-sm overflow-hidden shadow-md">
+    <Link
+      to={'/product-info'}
+      className="flex flex-col justify-between bg-zinc-50 w-full rounded-sm overflow-hidden shadow-md"
+    >
       <div className="h-full flex flex-col">
         {/* CARD-IMAGE */}
         <div>
@@ -14,24 +16,37 @@ const ProductCard = ({ product }) => {
 
         {/* CARD-INFO */}
         <div className="flex flex-col justify-between mt-5 p-2 space-y-3 h-full">
-          <h2 className="text-xl lg:text-2xl font-semibold capitalize">
-            {title}
-          </h2>
           <p className="font-normal text-zinc-700">{description}</p>
 
           <div className="flex flex-row items-center justify-between mt-auto">
-            <div className="">
-              <Stars />
-            </div>
             <div>
-              <h2 className="font-semibold text-2xl">${price}</h2>
+              {/* <h2 className="font-semibold text-2xl">${price}</h2> */}
+              <h2 className="text-xl lg:text-2xl font-semibold capitalize">
+                {title}
+              </h2>
+            </div>
+
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* CART-BTN */}
-      <div className="flex justify-between items-center mt-2 gap-2 p-2">
+        {/* CART-BTN */}
+        {/* <div className="flex justify-between items-center mt-2 gap-2 p-2">
         <button className="w-full flex flex-row items-center font-semibold bg-zinc-200 rounded-sm px-2 text-sm lg:text-base py-2 gap-1 justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,8 +67,9 @@ const ProductCard = ({ product }) => {
         <button className="w-full font-semibold bg-zinc-200 rounded-sm px-2 text-sm lg:text-base py-2">
           <Link to={'/product-info'}>Buy Pack</Link>
         </button>
+      </div> */}
       </div>
-    </div>
+    </Link>
   );
 };
 
