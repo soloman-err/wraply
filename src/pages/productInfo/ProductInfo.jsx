@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -202,13 +202,14 @@ const countries = [
   'Zimbabwe',
 ];
 
-const Product = () => {
+const ProductInfo = () => {
   const navigate = useNavigate();
-  const [submitError, setSubmitError] = useState(false);
-
   const location = useLocation();
+  const [submitError, setSubmitError] = useState(false);
+  const [quantity, setQuantity] = useState(1);
   const product = location.state?.product;
-  const { _id, description, imageUrl, price, title } = product;
+  const { imageUrl, price, title } = product;
+  const [totalPrice, setTotalPrice] = useState(price);
 
   const {
     register,
@@ -219,13 +220,40 @@ const Product = () => {
   // PRODUCT-FORM-FUNC:
   const onSubmit = (data) => {
     if (isValid) {
+      const productInfo = { ...data, totalPrice };
       console.log('Valid Form', data);
-      navigate('/checkout', { state: { FormData: data } });
+      navigate('/checkout', { state: { FormData: productInfo } });
     } else {
       console.log('Invalid Form', data);
       setSubmitError(true);
     }
   };
+
+  // QUANTITY-AMOUNT-STATE-FUNC:
+  const handleQuantityChange = useCallback(
+    (e) => {
+      const newQuantity = parseInt(e.target.value, 10) || 1;
+      setQuantity(newQuantity);
+
+      const totalPriceWithoutShipping = parseFloat(
+        (price * newQuantity).toFixed(2)
+      );
+
+      const shippingCost = parseFloat(
+        (0.05 * totalPriceWithoutShipping).toFixed(2)
+      );
+
+      const totalAmount = parseFloat(
+        totalPriceWithoutShipping + shippingCost
+      ).toFixed(2);
+
+      setTotalPrice(parseFloat(totalAmount));
+    },
+    [price]
+  );
+
+  // SHIPPING-COST-FUNC:
+  const shippingCost = parseFloat((0.05 * totalPrice).toFixed(2));
 
   return (
     <div className="lg:w-[80%] mx-auto flex flex-col md:flex-row gap-5 space-y-2 md:space-y-0 min-h-screen mt-5 p-5">
@@ -250,13 +278,13 @@ const Product = () => {
             </span>
 
             <span className="flex justify-between font-semibold text-zinc-700">
-              <span>Shipping:</span> <span>${price}</span>
+              <span>Shipping:</span> <span>${shippingCost}</span>
             </span>
 
             <hr />
 
             <span className="flex justify-between font-bold text-zinc-700 text-lg">
-              <span>Total:</span> <span>${price}</span>
+              <span>Total:</span> <span>${totalPrice}</span>
             </span>
           </div>
         </div>
@@ -278,7 +306,7 @@ const Product = () => {
             <select
               id="options"
               {...register('size', { require: true })}
-              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
+              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none bg-zinc-200"
             >
               <option value="" disabled selected>
                 Product Size
@@ -348,7 +376,7 @@ const Product = () => {
             <select
               id="options"
               {...register('quality', { required: true })}
-              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
+              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none bg-zinc-200"
             >
               <option value="" disabled selected>
                 Quality
@@ -371,7 +399,7 @@ const Product = () => {
             <select
               id="finishingOptions"
               {...register('finishingOptions', { required: true })}
-              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none"
+              className="w-full p-2 rounded-sm text-zinc-700 focus:outline-none bg-zinc-200"
             >
               <option value="" disabled selected>
                 Finishing Options
@@ -394,6 +422,8 @@ const Product = () => {
             <input
               type="number"
               id="quantity"
+              value={quantity}
+              onChangeCapture={handleQuantityChange}
               {...register('quantity', { required: true })}
               className="w-full p-2 rounded-sm bg-zinc-200 text-zinc-700 focus:outline-none"
               placeholder="Quantity"
@@ -550,21 +580,21 @@ const Product = () => {
             </svg>
           </span>{' '}
           <span className="font-bold text-2xl">
-            ${100.0}
+            ${totalPrice}
             <span className="text-base"> (+ Tax)</span>
           </span>
         </div>
 
         {/* PROCEED-CHECKOUT */}
         <div className="space-y-5 text-lg text-white font-semibold">
+          {/* CHECKOUT-BTN */}
           <button
             // disabled={!isValid}
             onClick={handleSubmit(onSubmit)}
-            className={`flex justify-center items-center gap-2 w-full hover:bg-accent bg-accent/80 py-2 px-4 rounded-sm 
+            className={`flex justify-center items-center gap-1 w-full hover:bg-accent bg-accent/80 py-2 px-4 rounded-sm 
             ${!isValid ? 'bg-gray-300 cursor-not-allowed' : ''}
             `}
           >
-            Proceed to Checkout
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -579,27 +609,32 @@ const Product = () => {
                 d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
               />
             </svg>
+            Proceed to Checkout
           </button>
 
           {/* CART&BACK-BTN */}
           <div className="flex flex-col lg:flex-row justify-between items-center mt-2 gap-2 text-base">
             {/* ADD-CART-BTN */}
-            <button className="flex justify-center items-center gap-1 w-full hover:bg-primary bg-zinc-500 py-2 px-4 rounded-sm">
+            <button
+              className={`flex justify-center items-center gap-1 w-full hover:bg-primary bg-zinc-500 py-2 px-4 rounded-sm
+            ${!isValid ? 'bg-gray-300 cursor-not-allowed' : ''}
+            `}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-5 h-5"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
                 />
               </svg>
-              Add Cart
+              Add to Queue
             </button>
 
             {/* CONTINUE-SHOPPING-BTN */}
@@ -615,4 +650,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductInfo;

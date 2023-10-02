@@ -16,6 +16,7 @@ const Checkout = () => {
     quality,
     finishingOptions,
     quantity,
+    totalPrice,
   } = formData;
 
   return (
@@ -41,7 +42,7 @@ const Checkout = () => {
             </p>
             <p className="flex justify-between items-center">
               <span className="font-semibold">Quantity:</span>{' '}
-              <span>{quantity}</span>
+              <span>{quantity} /pcs</span>
             </p>
           </div>
         </div>
@@ -113,8 +114,9 @@ const Checkout = () => {
 
       {/* PAYMENT-INFO */}
       <section>
-        <h2 className="text-lg font-semibold bg-zinc-500 text-white p-2">
-          Choose Payment Method
+        <h2 className="flex justify-between items-center text-lg font-bold bg-zinc-500 text-white p-2">
+          <span>Choose Payment Method</span>
+          <span className="font-bold text-xl">Total: ${totalPrice}</span>
         </h2>
 
         {/* PAYMENT-PARTNERS */}

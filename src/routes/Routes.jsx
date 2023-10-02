@@ -4,8 +4,8 @@ import Checkout from '../pages/Checkout/Checkout';
 import Home from '../pages/Home/Home';
 import Cart from '../pages/cart/Cart';
 import Payments from '../pages/payments/Payments';
-import Product from '../pages/product/Product';
-import Wishlist from '../pages/wishlist/Wishlist';
+import ProductInfo from '../pages/productInfo/ProductInfo';
+import Queue from '../pages/queue/Queue';
 
 const router = createBrowserRouter([
   {
@@ -13,10 +13,10 @@ const router = createBrowserRouter([
     element: <Root />,
     children: [
       { path: '/', element: <Home /> },
-      { path: 'product-info', element: <Product /> },
+      { path: 'product-info', element: <ProductInfo /> },
       { path: 'checkout', element: <Checkout /> },
       { path: 'cart', element: <Cart /> },
-      { path: 'wishlist', element: <Wishlist /> },
+      { path: 'queue', element: <Queue /> },
       { path: 'payments', element: <Payments /> },
     ],
   },
