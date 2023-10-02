@@ -23,7 +23,7 @@ const Checkout = () => {
         </h2>
 
         {/* PAYMENT-PARTNERS */}
-        <div className="mt-5 flex flex-col mg:flex-row items-center">
+        <div className="mt-5 flex flex-col md:flex-row items-center">
           <img src="/ssl.png" alt="ssl" className="w-32 h-10 cursor-pointer" />
           <img
             src="/stripe.png"
