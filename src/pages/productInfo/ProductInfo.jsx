@@ -220,8 +220,16 @@ const ProductInfo = () => {
   // PRODUCT-FORM-FUNC:
   const onSubmit = (data) => {
     if (isValid) {
-      const productInfo = { ...data, totalPrice };
+      const productInfo = { ...data, totalPrice, title };
       console.log('Valid Form', data);
+
+      // Saving product info to cart/queue:
+      const existingCartQueue = JSON.parse(localStorage.getItem('cartQueue')) || [];
+
+      const updatedCartQueue = [...existingCartQueue, productInfo];
+
+      localStorage.setItem('cartQueue', JSON.stringify(updatedCartQueue));
+
       navigate('/checkout', { state: { FormData: productInfo } });
     } else {
       console.log('Invalid Form', data);
@@ -615,7 +623,7 @@ const ProductInfo = () => {
           {/* CART&BACK-BTN */}
           <div className="flex flex-col lg:flex-row justify-between items-center mt-2 gap-2 text-base">
             {/* ADD-CART-BTN */}
-            <button
+            {/* <button
               className={`flex justify-center items-center gap-1 w-full hover:bg-primary bg-zinc-500 py-2 px-4 rounded-sm
             ${!isValid ? 'bg-gray-300 cursor-not-allowed' : ''}
             `}
@@ -635,7 +643,7 @@ const ProductInfo = () => {
                 />
               </svg>
               Add to Queue
-            </button>
+            </button> */}
 
             {/* CONTINUE-SHOPPING-BTN */}
             <button className="w-full hover:bg-primary bg-zinc-500 py-2 px-4 rounded-sm">

@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useCartQueue from '../../hooks/useCartQueue';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isUserOpen, setIsUserOpen] = useState(false);
+  const [cartQueue] = useCartQueue();
+  console.log(cartQueue);
 
   // TOGGLE-BAR FUNC
   const handleToggle = () => {
@@ -26,10 +29,12 @@ const Header = () => {
 
   // CART & USER CONFIG:
   const handleCartToggle = () => {
+    setIsUserOpen(false);
     setIsCartOpen(!isCartOpen);
   };
 
   const handleUserToggle = () => {
+    setIsCartOpen(false);
     setIsUserOpen(!isUserOpen);
   };
 
@@ -157,19 +162,24 @@ const Header = () => {
           {isCartOpen && (
             <div
               onClick={handleCartToggle}
-              className="absolute right-20 w-full top-full mt-0 bg-white rounded-md shadow-md"
+              className="absolute right-20 w-60 top-full mt-0 bg-white rounded-md shadow-md"
             >
-              <ul>
-                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
-                  <Link>Product 1</Link>
-                </li>
-                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
-                  <Link>Product 2</Link>
-                </li>
-                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
-                  <Link>Product 3</Link>
-                </li>
-              </ul>
+              {cartQueue?.length === 0 ? (
+                <div>No items in the cart.</div>
+              ) : (
+                <ul>
+                  {cartQueue &&
+                    cartQueue?.map((item, index) => (
+                      <li
+                        key={index}
+                        className="flex justify-between bg-zinc-50 w-full py-2 px-2 hover:bg-zinc-200 border-b"
+                      >
+                        <span className="font-semibold">{item?.title}</span>
+                        <span className="font-bold">${item?.totalPrice}</span>
+                      </li>
+                    ))}
+                </ul>
+              )}
             </div>
           )}
 
