@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
 
   // TOGGLE-BAR FUNC
   const handleToggle = () => {
@@ -12,8 +14,8 @@ const Header = () => {
   // NAV-ITEMS:
   const navLinks = [
     { path: '/', text: 'Home' },
+    { path: '/deals', text: 'Deals' },
     { path: '/shop', text: 'Shop' },
-    { path: '/categories', text: 'Categories' },
     { path: '/about', text: 'About' },
     { path: '/contact', text: 'Contact' },
     { divider: true },
@@ -21,6 +23,15 @@ const Header = () => {
     { path: '/wishlist', text: 'Wishlist' },
     { path: '/payments', text: 'Payments' },
   ];
+
+  // CART & USER CONFIG:
+  const handleCartToggle = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const handleUserToggle = () => {
+    setIsUserOpen(!isUserOpen);
+  };
 
   return (
     <header className="w-full sticky top-0 left-0 z-50 flex justify-between py-5 px-2 glass">
@@ -105,8 +116,9 @@ const Header = () => {
         </button>
 
         {/* CART/USER-INFO */}
-        <div className="hidden lg:flex items-center gap-2">
-          <button className="px-3 py-1 rounded-sm">
+        <div className="relative hidden lg:flex items-center gap-2">
+          {/* CART-BTN */}
+          <button onClick={handleCartToggle} className="px-3 py-1 rounded-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -122,7 +134,9 @@ const Header = () => {
               />
             </svg>
           </button>
-          <button className="px-3 py-1 rounded-sm">
+
+          {/* USER-BTN */}
+          <button onClick={handleUserToggle} className="px-3 py-1 rounded-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -138,6 +152,48 @@ const Header = () => {
               />
             </svg>
           </button>
+
+          {/* ----DROPDOWNS---- */}
+          {isCartOpen && (
+            <div
+              onClick={handleCartToggle}
+              className="absolute right-20 w-full top-full mt-0 bg-white rounded-md shadow-md"
+            >
+              <ul>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Product 1</Link>
+                </li>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Product 2</Link>
+                </li>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Product 3</Link>
+                </li>
+              </ul>
+            </div>
+          )}
+
+          {isUserOpen && (
+            <div
+              onClick={handleUserToggle}
+              className="absolute right-0 top-full mt-0 bg-white rounded-md shadow-md"
+            >
+              <ul>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Profile</Link>
+                </li>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Dashboard</Link>
+                </li>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Login</Link>
+                </li>
+                <li className="bg-zinc-50 w-full py-2 px-5 hover:bg-zinc-200">
+                  <Link>Register</Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </header>
