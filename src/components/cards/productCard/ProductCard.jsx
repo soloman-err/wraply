@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const { imageUrl, title, description, price } = product;
-
   const truncatedDescription =
     description.length > 100 ? `${description.slice(0, 100)}...` : description;
 
